@@ -132,57 +132,81 @@ public class Algoritmos : MonoBehaviour
 
 	float calcularPosicion(int segundos,int milisegundo)
 	{
-		if (segundos == 0) {
-			if (milisegundo <= 100)
-				return -4f;
-			else if (milisegundo <= 200)
-				return -3.8f;
-			else if (milisegundo <= 300)
-				return -3.6f;
-			else if (milisegundo <= 400)
-				return -3.4f;
-			else if (milisegundo <= 500)
-				return -3.2f;
-			else if (milisegundo <= 600)
-				return -3f;
-			else if (milisegundo <= 700)
-				return -2.8f;
-			else if (milisegundo <= 800)
-				return -2.6f;
-			else if (milisegundo <= 900)
-				return -2.4f;
+		float valor =0f;// (segundos * 1f);
+		if (segundos < 0) segundos = 0;
+
+		if (segundos != 0 && milisegundo >= 0) {
+			
+
+			if (Mathf.Abs(milisegundo) <= 100)
+			{
+
+				return 3.2f + valor;//return 2.8f + valor;
+			}
+			else if (Mathf.Abs(milisegundo) <= 200)
+			{
+				return 4f + valor;//return 2.4f + valor;
+			}
+			else if (Mathf.Abs(milisegundo) <= 300)
+			{
+				return 4.8f + valor;//return 2f + valor;
+			}
+			else if (Mathf.Abs(milisegundo) <= 400)
+			{
+				return 5.6f + valor;//return 1.6f + valor;
+			}
+			else if (Mathf.Abs(milisegundo) <= 500)
+			{
+				return 6.4f + valor;//return 1.2f + valor;
+			}
+			else if (Mathf.Abs(milisegundo) <= 600)
+			{
+				return 7.2f + valor;//return 0.8f + valor;
+			}
+			else if (Mathf.Abs(milisegundo) <= 700)
+			{
+				return 8f + valor;//return 0.4f + valor;
+			}
+			else if (Mathf.Abs(milisegundo) <= 800)
+			{
+				return 8.8f + valor;//return 0f + valor;
+			}
+			else if (Mathf.Abs(milisegundo) <= 900)
+			{
+				return 9.6f + valor;//return -0.4f + valor;
+
+			}
+			
 
 		}
 		else
 		{
-			float valor = (segundos * 1f);
-
-			if (Mathf.Abs (milisegundo) <= 100) {
-				
-					return -2.2f + valor;
-			} else if (Mathf.Abs (milisegundo) <= 200) {
-					return -2f + valor;
-			} else if (Mathf.Abs (milisegundo) <= 300) {
-				return -1.8f + valor;
-			} else if (Mathf.Abs (milisegundo) <= 400) {
+			if(milisegundo < 0)
+            {
+				milisegundo = 1000 + milisegundo;
+            }
+			if (milisegundo <= 100)
+				return -4f + valor;
+			else if (milisegundo <= 200)
+				return -3.2f + valor;
+			else if (milisegundo <= 300)
+				return -2.4f + valor;
+			else if (milisegundo <= 400)
 				return -1.6f + valor;
-			} else if (Mathf.Abs (milisegundo) <= 500) {
-				return -1.4f + valor;
-			} else if (Mathf.Abs (milisegundo) <= 600) {
-				return -1.2f + valor;
-			} else if (Mathf.Abs (milisegundo) <= 700) {
-				return -1f + valor;				
-			}
-			else if (Mathf.Abs (milisegundo) <= 800) {
+			else if (milisegundo <= 500)
 				return -0.8f + valor;
-			}
-			else if (Mathf.Abs (milisegundo) <= 900) {
-				return -0.6f + valor;
+			else if (milisegundo <= 600)
+				return 0f + valor;
+			else if (milisegundo <= 700)
+				return 0.8f + valor;
+			else if (milisegundo <= 800)
+				return 1.6f + valor;
+			else if (milisegundo <= 900)
+				return 2.4f + valor;
 
-			}
-				
+
 		}
-		return 0f;
+		return 3f;
 
 
 	}
@@ -195,7 +219,7 @@ public class Algoritmos : MonoBehaviour
 
 		crearLineas ();
 		int milisegundoActual = 0;
-		int segundoActual = System.DateTime.Now.Second;
+		
 		float posX = (float)-7.5;
 
 		for (int i = 0; i < 7; i++)
@@ -205,15 +229,16 @@ public class Algoritmos : MonoBehaviour
 			{
 				List<int> lista = generarRandom(entrances[i]);
 
+				int segundoActual = System.DateTime.Now.Second;
 
 				milisegundoActual = System.DateTime.Now.Millisecond;
 
-				//insertSort(lista);
+				insertSort(lista);
 
-				selectSort (lista);
+				//selectSort (lista);
 
 
-				print(System.DateTime.Now.Second -segundoActual+"Diferencia de segundos"); print(Mathf.Abs(System.DateTime.Now.Millisecond - milisegundoActual)+ "diferencia de Milisegundos");  
+				print(System.DateTime.Now.Second);print(segundoActual); print((System.DateTime.Now.Second - segundoActual) + "Diferencia de segundos"); print((System.DateTime.Now.Millisecond - milisegundoActual)+ "diferencia de Milisegundos para " + entrances[i]);  
 
 
 				Instantiate(objeto, new Vector3(posX, calcularPosicion( System.DateTime.Now.Second -segundoActual, System.DateTime.Now.Millisecond - milisegundoActual), 1), Quaternion.identity); //Dibuja en grafico
